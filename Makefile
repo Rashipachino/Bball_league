@@ -19,6 +19,9 @@ run: test
 test:  $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+demo: objects/Demo.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
