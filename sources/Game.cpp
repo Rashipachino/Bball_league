@@ -11,9 +11,3 @@ using namespace std;
             return this->away->get_name();
         }
     }
-     int Game::score(){
-        if(this->home_score >= this->away_score){
-            return home_score;
-        }
-        return away_score;
-    }

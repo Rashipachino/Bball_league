@@ -14,6 +14,9 @@ class League{
         vector<Team*> teams;
     public:
         League(vector<Team*> t){
+            if(t.size() > 20){
+                throw invalid_argument("League is at most 20 teams!");
+            }
             if(t.size() == 20){
                 this->teams = t;
             }
@@ -33,42 +36,40 @@ class League{
             }
             vector<int> indexes = {0};
             vector<string> b_ball;
-            b_ball.push_back("Golden State Warriors");
-            b_ball.push_back("Los Angeles Lakers");
-            b_ball.push_back("Boston Celtics");
-            b_ball.push_back("Toronto Raptors");
-            b_ball.push_back("New York Knicks");
-            b_ball.push_back("Chicago Bulls");
-            b_ball.push_back("Phoenix Suns");
-            b_ball.push_back("Dallas Mavericks");
-            b_ball.push_back("Philadelphia 76ers");
-            b_ball.push_back("Brooklyn Nets");
-            b_ball.push_back("Milwaukee Bucks");
-            b_ball.push_back("San Antonio Spurs");
-            b_ball.push_back("Atlanta Hawks");
-            b_ball.push_back("Washington Wizards");
-            b_ball.push_back("Sacremento Kings");
-            b_ball.push_back("Detroit Pistons");
-            b_ball.push_back("Utah Jazz");
-            b_ball.push_back("Miami Heat");
-            b_ball.push_back("Cleveland Cavaliers");
-            b_ball.push_back("Memphis Grizzlies");
-            b_ball.push_back("New Orleans Pelicans");
-            b_ball.push_back("Charlotee Hornets");
-            b_ball.push_back("Minnesota Timberwolves");
-            b_ball.push_back("Houston Rockets");
-            b_ball.push_back("Indiana Pacers");
-            b_ball.push_back("Oklahoma City Thunder");
+            b_ball.push_back("Maccabi Tel Aviv");
+            b_ball.push_back("Hapoel Jerusalem");
+            b_ball.push_back("Hapoel Holon");
+            b_ball.push_back("Hapoel Gilboa Galil");
+            b_ball.push_back("Hapoel Fattal Eilat");
+            b_ball.push_back("Hapoel Tel Aviv");
+            b_ball.push_back("Hapoel Be'er Sheva");
+            b_ball.push_back("Hapoel Galil Elyon");
+            b_ball.push_back("Maccabi Haifa");
+            b_ball.push_back("Hapoel Haifa");
+            b_ball.push_back("Ironi Ness Ziona");
+            b_ball.push_back("Ironi Nahariya");
+            b_ball.push_back("Maccabi Rishon Lezion");
+            b_ball.push_back("Maccabi Ironi Ramat Gan");
+            b_ball.push_back("Elitzur Ironi Netanya");
+            b_ball.push_back("Maccabi Ashdod");
+            b_ball.push_back("Ironi Kiryat Ata");
+            b_ball.push_back("Hapoel Afula");
+            b_ball.push_back("Maccabi Hod haSharon");
+            b_ball.push_back("Maccabi Ma'ale Adumim");
+            b_ball.push_back("Hapoel Hevel Modi'n");
+            b_ball.push_back("Ironi Ashkelon");
+            b_ball.push_back("Hapoel Gvat/Yagur");
+            b_ball.push_back("Maccabi Raanana");
+            b_ball.push_back("Hapoel Ramat Gan");
+            b_ball.push_back("Elizur Ashkelon");
             b_ball.push_back("Orlando Magic");
             b_ball.push_back("Los Angeles Clippers");
             b_ball.push_back("Denver Nuggets");
             b_ball.push_back("Portland Trail Blazers");
-            srand(time(0));
             for(int i = 0; i < n; i++){
                 unsigned long index = (unsigned long)rand() % 30; //random number between 0-30
                 while (find(indexes.begin(), indexes.end(), index) != indexes.end()){ //team name is already taken
-                    //sleep(1);
-                    usleep(700000);
+                    usleep(900000);
                     index = (unsigned long)rand() % 30; //random number between 0-30
                 }
                 Team* p_team = new Team(b_ball[index]);
@@ -76,25 +77,6 @@ class League{
                 indexes.emplace_back(index);
             }
         }
-        // ~League(){
-        //     vector<Team*>::iterator it;
-        //    for(it = teams.begin(); it != teams.end(); it++){
-        //         delete *it;
-        //    }
-        //    teams.clear();
-        //     // for ( auto p : teams )
-        //     //     delete p;
-        //     // for (unsigned long i = 0; i < teams.size(); i++)
-        //     // {
-        //     //     cout << i << endl;
-        //     //     Team* t = teams.at(i); // not it
-        //     //     cout << "team to be deleted: " << t->get_name() << endl;
-        //     //     delete t; 
-        //     // }
-            
-        // }
-        vector<Team*> get_teams(){
-            return this->teams;
-        } 
+        vector<Team*> get_teams();
 };
 
