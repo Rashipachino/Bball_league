@@ -28,25 +28,25 @@ void Team::points_update(int won, int lost){
 string Team::get_name(){
     return this->name;
 }
-double Team::get_skill_level(){
+double Team::get_skill_level() const{
     return this->skill_level;
 }
-int Team::get_points_scored(){
+int Team::get_points_scored() const{
     return this->points_scored;
 }        
-int Team::get_points_lost(){
+int Team::get_points_lost() const{
     return this->points_lost;
 }
-int Team::get_longest_win_streak(){
+int Team::get_longest_win_streak() const{
     return longest_win_streak;
 }
-int Team::get_longest_lose_streak(){
+int Team::get_longest_lose_streak() const{
     return this->longest_lose_streak;
 }
-int Team::get_wins(){
+int Team::get_wins() const{
     return this->wins;
 }
-int Team::get_loses(){
+int Team::get_loses() const{
     return this->loses;
 }
 

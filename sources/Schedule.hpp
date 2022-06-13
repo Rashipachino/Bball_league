@@ -9,6 +9,9 @@
 #include <algorithm>
 #include <functional>
 
+constexpr int LEAGUE_S = 19;
+constexpr int ROUND_S = 38;
+
 using namespace std;
 
 class Schedule{
@@ -18,14 +21,14 @@ class Schedule{
     public:
         Schedule(League l){
             //season_sched
-            for (int i = 0; i < 38; i++) //create 38 vectors for the 38 weeks of games
+            for (int i = 0; i < ROUND_S; i++) //create 38 vectors for the 38 weeks of games
             {
                 season_sched.push_back(vector<Game*>());
             }
             vector<Team*> league_teams = l.get_teams();
             unsigned long size = league_teams.size();
             unsigned long k = 0;
-            while(k < 19){
+            while(k < LEAGUE_S){
                 for (unsigned long i = 0; i < size/2; i++)
                 {
                     Game* g_home = new Game(league_teams[i], league_teams[size-i-1]);
@@ -38,29 +41,65 @@ class Schedule{
                 k++;
             }
             //stats
-             for(auto t : league_teams){
+             for(auto *t : league_teams){
                 this->stats.push_back(t);
             }
             for (size_t i = 0; i < stats.size() - 1; ++i) {
                 for (size_t j = 0; j < stats.size() - i - 1; ++j) {
                     if (stats.at(j)->get_wins() < stats.at(j + 1)->get_wins()){
-                        Team tmp = Team(" ");
-                        Team* p_t = &tmp;
-                        p_t = stats.at(j);
+                        Team* p_t = stats.at(j);
                         stats.at(j) = stats.at(j + 1);
                         stats.at(j + 1) = p_t;
                     }
                     if(stats.at(j)->get_wins() == stats.at(j + 1)->get_wins()){
                         if(stats.at(j)->get_points_scored() < stats.at(j + 1)->get_points_scored()){
-                             Team tmp = Team(" ");
-                            Team* p_t = &tmp;
-                            p_t = stats.at(j);
+                            Team* p_t = stats.at(j);
                             stats.at(j) = stats.at(j + 1);
                             stats.at(j + 1) = p_t;
                         }
                     } 
                 }
             }
+        }
+         Schedule(const Schedule &other) {
+            this->stats = other.stats;
+            for(auto const &r : other.season_sched) {
+                this->season_sched.push_back(r);
+            }
+        }
+        Schedule& operator=(const Schedule& other) {
+            if(this != &other) {
+                this->stats = other.stats;
+                for(auto const &r : other.season_sched) {
+                this->season_sched.push_back(r);
+            }
+            }
+            return *this;
+        }
+        Schedule(Schedule&& other) noexcept {
+            this->stats = other.stats;
+            for(auto const &r : other.season_sched) {
+                this->season_sched.push_back(r);
+            }
+            other.stats.clear();
+            for(auto r : other.season_sched) {
+                r.clear();
+            }
+            other.season_sched.clear();
+        }
+        Schedule& operator=(Schedule&& other) noexcept {
+            if (this != &other) {
+                this->stats = other.stats;
+                for(auto const &r : other.season_sched) {
+                    this->season_sched.push_back(r);
+                }
+                other.stats.clear();
+                for(auto r : other.season_sched) {
+                    r.clear();
+                }
+                other.season_sched.clear();
+            }
+            return *this;
         }
         ~Schedule(){
             for(unsigned long i = 0; i < season_sched.size(); i++){

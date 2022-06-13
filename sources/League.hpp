@@ -7,28 +7,33 @@
 #include <unistd.h>
 #include "Team.hpp"
 
+constexpr int THIRTY = 30;
+constexpr int SLEEP = 900000;
+constexpr int TEAM_S = 20;
+
+
+
 
 using namespace std;
 class League{
-    protected:
         vector<Team*> teams;
     public:
         League(vector<Team*> t){
-            if(t.size() > 20){
+            if(t.size() > (unsigned long)TEAM_S){
                 throw invalid_argument("League is at most 20 teams!");
             }
-            if(t.size() == 20){
+            if(t.size() == (unsigned long)TEAM_S){
                 this->teams = t;
             }
             else{
                 for(unsigned long i = 0; i < t.size(); i++){
                    this->teams.push_back(t[i]);
                 }
-                rand_constructor(20 - t.size());
+                rand_constructor((unsigned long)TEAM_S - t.size());
             }
         }
         League(){
-            rand_constructor(20);
+            rand_constructor(TEAM_S);
         }
         void rand_constructor(int n){
             if(n == 0){
@@ -67,10 +72,10 @@ class League{
             b_ball.push_back("Denver Nuggets");
             b_ball.push_back("Portland Trail Blazers");
             for(int i = 0; i < n; i++){
-                unsigned long index = (unsigned long)rand() % 30; //random number between 0-30
+                unsigned long index = (unsigned long)rand() % THIRTY; //random number between 0-30
                 while (find(indexes.begin(), indexes.end(), index) != indexes.end()){ //team name is already taken
-                    usleep(900000);
-                    index = (unsigned long)rand() % 30; //random number between 0-30
+                    usleep(SLEEP);
+                    index = (unsigned long)rand() % THIRTY; //random number between 0-30
                 }
                 Team* p_team = new Team(b_ball[index]);
                 this->teams.push_back(p_team);

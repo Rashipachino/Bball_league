@@ -3,10 +3,18 @@
 #include <random>
 #include "Team.hpp"
 
+constexpr int TALENT = 10;
+constexpr int HOME = 51;
+constexpr int HOME_S = 55;
+constexpr int AWAY = 46;
+constexpr int AWAY_S = 50;
+
+
+
+
 using namespace std;
 
     class Game{
-        protected:
             Team* home;
             Team* away;
             int home_score;
@@ -18,8 +26,8 @@ using namespace std;
                 }
                 home = t1;
                 away = t2;
-                home_score = 55 + (rand() % 46) + home->get_skill_level()*10; 
-                away_score = 50 + (rand() % 51) + away->get_skill_level()*10;
+                home_score = HOME_S + (rand() % AWAY) + home->get_skill_level()*TALENT; 
+                away_score = AWAY_S + (rand() % HOME) + away->get_skill_level()*TALENT;
                 if(this->home_score >= this->away_score){
                     this->home->streak_update(1);
                     this->home->points_update(home_score, away_score);
@@ -40,10 +48,10 @@ using namespace std;
             Team* get_away_team(){
                 return away;
             }
-            int get_home_score(){
+            int get_home_score() const{
                 return home_score;
             }
-            int get_away_score(){
+            int get_away_score() const{
                 return away_score;
             }
             string winner();

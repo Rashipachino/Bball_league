@@ -29,7 +29,7 @@ vector<Team*> Schedule::top_picks(int n){
 }
 int Schedule::longest_w_streak(){
     int longest = 0;
-    for(auto s : stats){
+    for(auto *s : stats){
         if(s->get_longest_win_streak() > longest){
             longest = s->get_longest_win_streak();
         }
@@ -38,7 +38,7 @@ int Schedule::longest_w_streak(){
 }
 int Schedule::longest_l_streak(){
     int longest = 0;
-    for(auto s : stats){
+    for(auto *s : stats){
         if(s->get_longest_lose_streak() > longest){
             longest = s->get_longest_lose_streak();
         }
@@ -47,7 +47,7 @@ int Schedule::longest_l_streak(){
 }
 int Schedule::scored_over_lost(){
     int count = 0;
-    for(auto s : stats){
+    for(auto *s : stats){
         if(s->get_points_scored() > s->get_points_lost()){
             count++;
         }
@@ -56,7 +56,7 @@ int Schedule::scored_over_lost(){
 }
 int Schedule::lost_over_scored(){
     int count = 0;
-        for(auto s : stats){
+        for(auto *s : stats){
             if(s->get_points_scored() < s->get_points_lost()){
                 count++;
             }
@@ -65,7 +65,7 @@ int Schedule::lost_over_scored(){
 }
 int Schedule::tie_scores(){
     int count = 0;
-        for(auto s : stats){
+        for(auto *s : stats){
             if(s->get_points_scored() == s->get_points_lost()){
                 count++;
             }
@@ -74,7 +74,7 @@ int Schedule::tie_scores(){
 }
 int Schedule::wins_over_losses(){
     int count = 0;
-        for(auto s : stats){
+        for(auto *s : stats){
             if(s->get_wins() > s->get_loses()){
                 count++;
             }
@@ -83,7 +83,7 @@ int Schedule::wins_over_losses(){
 }
 int Schedule::loses_over_wins(){
     int count = 0;
-        for(auto s : stats){
+        for(auto *s : stats){
             if(s->get_wins() < s->get_loses()){
                 count++;
             }
@@ -92,7 +92,7 @@ int Schedule::loses_over_wins(){
 }
 int Schedule::tie_wins_losses(){
     int count = 0;
-    for(auto s : stats){
+    for(auto *s : stats){
         if(s->get_wins() == s->get_loses()){
             count++;
         }

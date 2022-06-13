@@ -7,7 +7,5 @@ using namespace std;
         if(this->home_score >= this->away_score){ //tie game goes to the home team
             return this->home->get_name();
         }
-        else{
-            return this->away->get_name();
-        }
+        return this->away->get_name();
     }
