@@ -26,8 +26,8 @@ using namespace std;
                 }
                 home = t1;
                 away = t2;
-                home_score = HOME_S + (rand() % AWAY) + home->get_skill_level()*TALENT; 
-                away_score = AWAY_S + (rand() % HOME) + away->get_skill_level()*TALENT;
+                home_score = HOME_S + (rand() % HOME) + home->get_skill_level()*TALENT; 
+                away_score = AWAY_S + (rand() % AWAY) + away->get_skill_level()*TALENT;
                 if(this->home_score >= this->away_score){
                     this->home->streak_update(1);
                     this->home->points_update(home_score, away_score);
